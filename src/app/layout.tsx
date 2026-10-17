@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Maison Lookbook — Dresses",
+  title: "Rutu Fashion — Dresses",
   description: "A curated collection of dresses.",
 };
 

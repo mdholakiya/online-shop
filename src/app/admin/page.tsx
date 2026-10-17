@@ -83,7 +83,7 @@ async function AdminContent() {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
           <div className="flex items-center gap-3">
             <span className="font-serif text-xl font-semibold sm:text-2xl">
-              Maison <span className="text-accent">Lookbook</span>
+              Rutu <span className="text-accent">Fashion</span>
             </span>
             <span className="rounded-full bg-ink px-2.5 py-0.5 text-[10px] font-medium tracking-widest text-paper uppercase">
               Admin

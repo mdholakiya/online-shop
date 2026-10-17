@@ -9,3 +9,13 @@ const priceFormatter = new Intl.NumberFormat("en-IN", {
 export function formatPrice(value: number) {
   return priceFormatter.format(value);
 }
+
+// Tidies an address for display: trims each line, drops blank lines,
+// collapses extra spaces, and joins lines with commas.
+export function formatAddress(address: string) {
+  return address
+    .split("\n")
+    .map((line) => line.replace(/\s+/g, " ").trim().replace(/,$/, ""))
+    .filter(Boolean)
+    .join(", ");
+}

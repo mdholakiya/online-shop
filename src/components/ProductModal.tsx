@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Product } from "@/lib/types";
-import { formatPrice } from "@/lib/format";
+import { formatAddress, formatPrice } from "@/lib/format";
 import { MailIcon, PhoneIcon, PinIcon } from "./icons";
 
 type Props = {
@@ -156,7 +156,7 @@ export default function ProductModal({ product, onClose }: Props) {
                 </div>
                 <div className="flex gap-2">
                   <dt className="text-muted"><PinIcon className="mt-0.5 size-4" /><span className="sr-only">Address</span></dt>
-                  <dd className="whitespace-pre-line">{shown.address}</dd>
+                  <dd>{formatAddress(shown.address)}</dd>
                 </div>
               </dl>
             </div>

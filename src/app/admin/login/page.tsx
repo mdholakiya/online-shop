@@ -11,7 +11,7 @@ export default function AdminLoginPage() {
       <div className="relative hidden overflow-hidden bg-linear-to-br from-accent via-accent-dark to-ink p-12 text-paper lg:flex lg:flex-col lg:justify-between">
         <div aria-hidden="true" className="absolute -top-32 -right-32 size-96 rounded-full bg-paper/10 blur-3xl" />
         <Link href="/" className="relative font-serif text-3xl font-semibold">
-          Maison Lookbook
+          Rutu Fashion
         </Link>
         <div className="relative">
           <h2 className="font-serif text-5xl leading-tight">

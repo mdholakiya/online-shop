@@ -1,4 +1,5 @@
 import type { Product } from "@/lib/types";
+import { formatAddress } from "@/lib/format";
 import { MailIcon, PhoneIcon, PinIcon } from "./icons";
 
 type Contact = Pick<Product, "phone" | "email" | "address">;
@@ -18,7 +19,7 @@ export default function ContactSection({ contact }: { contact: Contact }) {
       href: `mailto:${contact.email}`,
       icon: <MailIcon />,
     },
-    { label: "Visit us", value: contact.address, icon: <PinIcon /> },
+    { label: "Visit us", value: formatAddress(contact.address), icon: <PinIcon /> },
   ];
 
   return (
@@ -47,7 +48,7 @@ export default function ContactSection({ contact }: { contact: Contact }) {
               <span className="mt-4 block text-xs tracking-wider text-paper/60 uppercase">
                 {item.label}
               </span>
-              <span className="mt-1 block break-words whitespace-pre-line text-base">
+              <span className="mt-1 block break-words text-base">
                 {item.value}
               </span>
             </>

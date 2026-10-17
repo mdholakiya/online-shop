@@ -12,28 +12,15 @@ export default function HomePage() {
     <>
       <SiteHeader />
       <main className="flex-1">
-        {/* Hero */}
-        <header className="relative overflow-hidden bg-linear-to-b from-blush via-blush/60 to-cream px-5 pt-16 pb-14 text-center sm:pt-24 sm:pb-20">
+        {/* Hero: just the shop name */}
+        <header className="relative overflow-hidden bg-linear-to-b from-blush via-blush/60 to-cream px-5 py-16 text-center sm:py-24">
           {/* Soft decorative circles */}
           <div aria-hidden="true" className="absolute -top-24 -left-24 size-72 rounded-full bg-accent/10 blur-3xl" />
           <div aria-hidden="true" className="absolute -right-20 -bottom-24 size-72 rounded-full bg-accent/10 blur-3xl" />
 
-          <p className="relative inline-block rounded-full bg-paper px-4 py-1.5 text-xs font-medium tracking-[0.3em] text-accent uppercase shadow-sm">
-            New Collection
-          </p>
-          <h1 className="relative mt-5 font-serif text-5xl leading-[1.05] font-medium sm:text-7xl">
-            Dresses made to <em className="font-normal text-accent">be loved</em>
+          <h1 className="relative font-serif text-6xl leading-none font-medium sm:text-8xl">
+            Rutu <em className="font-normal text-accent">Fashion</em>
           </h1>
-          <p className="relative mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted sm:text-base">
-            Handpicked styles for every occasion. Tap any dress to see details,
-            then call or email us to order.
-          </p>
-          <a
-            href="#collection"
-            className="relative mt-8 inline-block rounded-full bg-ink px-7 py-3 text-sm font-medium text-paper shadow-lg shadow-ink/10 transition hover:bg-accent"
-          >
-            Shop the collection
-          </a>
         </header>
 
         <section
@@ -56,7 +43,7 @@ export default function HomePage() {
       </main>
 
       <footer className="border-t border-line bg-paper py-8 text-center text-xs text-muted">
-        Maison Lookbook · Made with care
+        Rutu Fashion
       </footer>
     </>
   );
