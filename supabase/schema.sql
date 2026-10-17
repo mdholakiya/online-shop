@@ -10,7 +10,7 @@ returns boolean
 language sql
 stable
 as $$
-  select coalesce(auth.jwt() ->> 'email', '') = 'admin@example.com';
+  select coalesce(auth.jwt() ->> 'email', '') = 'admin@rutufashion.com';
 $$;
 
 -- 2) Products table
