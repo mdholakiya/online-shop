@@ -16,20 +16,12 @@ export default function SiteHeader() {
           <Link href="/" className="font-serif text-2xl font-semibold tracking-tight">
             Maison <span className="text-accent">Lookbook</span>
           </Link>
-          <div className="flex items-center gap-1 text-sm sm:gap-2">
-            <a
-              href="#collection"
-              className="rounded-full px-3 py-2 transition hover:bg-blush hover:text-accent"
-            >
-              Collection
-            </a>
-            <a
-              href="#contact"
-              className="rounded-full bg-accent px-4 py-2 font-medium text-paper shadow-sm transition hover:bg-accent-dark"
-            >
-              Contact
-            </a>
-          </div>
+          <a
+            href="#collection"
+            className="rounded-full px-3 py-2 text-sm transition hover:bg-blush hover:text-accent"
+          >
+            Collection
+          </a>
         </div>
       </nav>
     </>

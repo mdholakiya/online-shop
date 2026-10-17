@@ -2,9 +2,6 @@ import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 
-// Cycle through tall portrait shapes for a lookbook "masonry" rhythm
-const shapes = ["aspect-[3/4]", "aspect-[2/3]", "aspect-[4/5]"];
-
 type Props = {
   product: Product;
   index: number;
@@ -21,11 +18,11 @@ export default function ProductCard({ product, index, onOpen }: Props) {
       onClick={onOpen}
       aria-haspopup="dialog"
       aria-label={`View details for ${product.name}`}
-      className="group animate-fade-up block w-full cursor-pointer rounded-2xl bg-paper p-2 text-left shadow-sm ring-1 ring-line/60 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+      className="group animate-fade-up block h-full w-full cursor-pointer rounded-2xl bg-paper p-2 text-left shadow-sm ring-1 ring-line/60 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
     >
       <div
-        className={`relative overflow-hidden rounded-xl bg-blush ${shapes[index % shapes.length]}`}
+        className="relative aspect-[3/4] overflow-hidden rounded-xl bg-blush" // same portrait size for every card
       >
         <Image
           src={product.image_url}
