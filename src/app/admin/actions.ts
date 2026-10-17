@@ -49,3 +49,39 @@ export async function createProduct(
   updateTag(PRODUCTS_TAG);
   return { ok: true };
 }
+
+// Deletes a product and its image from Storage.
+export async function deleteProduct(id: string): Promise<Result> {
+  const supabase = await createClient();
+
+  // 1) Re-check who is calling (never trust the browser)
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { ok: false, message: "Please log in again." };
+
+  const { data: isAdmin } = await supabase.rpc("is_admin");
+  if (!isAdmin) return { ok: false, message: "Only the admin can delete products." };
+
+  // 2) Delete the row (RLS also blocks non-admins) and get its image URL back
+  const { data, error } = await supabase
+    .from("products")
+    .delete()
+    .eq("id", id)
+    .select("image_url");
+
+  if (error) return { ok: false, message: `Could not delete: ${error.message}` };
+  if (!data || data.length === 0) return { ok: false, message: "Product not found." };
+
+  // 3) Remove the image file too (not fatal if this fails)
+  const marker = "/storage/v1/object/public/product-images/";
+  const imageUrl: string = data[0].image_url ?? "";
+  const path = imageUrl.includes(marker) ? imageUrl.split(marker)[1] : "";
+  if (path) {
+    await supabase.storage.from("product-images").remove([decodeURIComponent(path)]);
+  }
+
+  // 4) Refresh the cached public product list
+  updateTag(PRODUCTS_TAG);
+  return { ok: true };
+}

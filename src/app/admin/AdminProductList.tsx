@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
+import DeleteProductButton from "./DeleteProductButton";
 
 const dateFormatter = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
 
@@ -36,6 +37,7 @@ export default function AdminProductList({ products }: { products: Product[] }) 
             <p className="mt-2 text-xs text-muted">
               Added {dateFormatter.format(new Date(p.created_at))}
             </p>
+            <DeleteProductButton id={p.id} name={p.name} />
           </div>
         </li>
       ))}
