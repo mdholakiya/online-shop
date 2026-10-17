@@ -53,7 +53,7 @@ export default function ProductCard({ product, index, onOpen }: Props) {
       </div>
 
       <div className="px-2 pt-3 pb-2">
-        <h3 className="font-serif text-lg leading-tight sm:text-xl">
+        <h3 className="line-clamp-2 font-serif text-lg leading-tight [overflow-wrap:anywhere] sm:text-xl">
           {product.name}
         </h3>
         <p className="mt-1 text-sm font-semibold text-accent">

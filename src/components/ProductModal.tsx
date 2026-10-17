@@ -91,57 +91,55 @@ export default function ProductModal({ product, onClose }: Props) {
             />
           </div>
 
-          {/* Details */}
-          <div className="flex flex-col p-6 sm:p-8 md:h-[min(88vh,44rem)] md:overflow-y-auto md:p-10">
+          {/* Details (min-w-0 lets long text wrap instead of overflowing) */}
+          <div className="flex min-w-0 flex-col overflow-x-hidden p-6 sm:p-8 md:h-[min(88vh,44rem)] md:overflow-y-auto md:p-10">
             <p className="text-xs font-medium tracking-[0.25em] text-accent uppercase">
               Rutu Fashion
             </p>
             <h2
               id="product-modal-title"
-              className="mt-2 font-serif text-3xl leading-tight font-medium sm:text-4xl"
+              className="mt-2 pr-10 font-serif text-3xl leading-tight font-medium [overflow-wrap:anywhere] sm:text-4xl"
             >
               {shown.name}
             </h2>
+            <p className="mt-3 text-3xl font-semibold tracking-tight text-accent">
+              {formatPrice(shown.price)}
+            </p>
 
-            {/* All details as labelled rows */}
-            <dl className="mt-6 divide-y divide-line overflow-hidden rounded-2xl bg-cream ring-1 ring-line">
-              <DetailRow label="Price">
-                <span className="text-xl font-semibold text-accent">
-                  {formatPrice(shown.price)}
-                </span>
-              </DetailRow>
-
-              <DetailRow label="Availability">
-                <span
-                  className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
-                    shown.quantity > 0
-                      ? "bg-emerald-50 text-emerald-800 ring-1 ring-emerald-200"
-                      : "bg-ink/5 text-muted ring-1 ring-line"
-                  }`}
-                >
+            {/* Availability + quantity side by side */}
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="rounded-xl bg-cream p-4 ring-1 ring-line">
+                <p className="text-[11px] font-medium tracking-wider text-muted uppercase">
+                  Availability
+                </p>
+                <p className="mt-1.5 flex items-center gap-2 font-medium">
                   <span
                     aria-hidden="true"
-                    className={`size-1.5 rounded-full ${shown.quantity > 0 ? "bg-emerald-600" : "bg-muted"}`}
+                    className={`size-2 rounded-full ${shown.quantity > 0 ? "bg-emerald-500" : "bg-muted"}`}
                   />
-                  {shown.quantity > 0 ? "In stock" : "Out of stock"}
-                </span>
-              </DetailRow>
-
-              <DetailRow label="Quantity">
-                <span className="font-medium">
+                  <span className={shown.quantity > 0 ? "text-emerald-700" : "text-muted"}>
+                    {shown.quantity > 0 ? "In stock" : "Out of stock"}
+                  </span>
+                </p>
+              </div>
+              <div className="rounded-xl bg-cream p-4 ring-1 ring-line">
+                <p className="text-[11px] font-medium tracking-wider text-muted uppercase">
+                  Quantity
+                </p>
+                <p className="mt-1.5 font-medium">
                   {shown.quantity} {shown.quantity === 1 ? "piece" : "pieces"}
-                </span>
-              </DetailRow>
-            </dl>
+                </p>
+              </div>
+            </div>
 
             {/* Description */}
-            <div className="mt-6">
-              <span className="inline-block rounded-full bg-blush px-3 py-1 text-[11px] font-semibold tracking-wider text-accent uppercase">
-                Description
-              </span>
+            <div className="mt-8 border-t border-line pt-6">
+              <h3 className="text-sm font-semibold tracking-wider uppercase">
+                Product details
+              </h3>
               <p
                 id="product-modal-description"
-                className="mt-3 text-[15px] leading-relaxed whitespace-pre-line text-ink/85"
+                className="mt-3 text-[15px] leading-relaxed whitespace-pre-line text-ink/80 [overflow-wrap:anywhere]"
               >
                 {shown.description || "No description yet."}
               </p>
@@ -150,19 +148,5 @@ export default function ProductModal({ product, onClose }: Props) {
         </div>
       )}
     </dialog>
-  );
-}
-
-// One labelled row: tag-style label on the left, value on the right
-function DetailRow({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex items-center justify-between gap-4 px-4 py-3.5">
-      <dt>
-        <span className="inline-block rounded-full bg-paper px-3 py-1 text-[11px] font-semibold tracking-wider text-muted uppercase ring-1 ring-line">
-          {label}
-        </span>
-      </dt>
-      <dd className="text-right">{children}</dd>
-    </div>
   );
 }
