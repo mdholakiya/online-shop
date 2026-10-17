@@ -13,12 +13,12 @@ export default function HomePage() {
       <SiteHeader />
       <main className="flex-1">
         {/* Hero: just the shop name */}
-        <header className="relative overflow-hidden bg-linear-to-b from-blush via-blush/60 to-cream px-5 py-16 text-center sm:py-24">
+        <header className="relative overflow-hidden bg-linear-to-b from-blush via-blush/60 to-cream px-5 py-8 text-center sm:py-10">
           {/* Soft decorative circles */}
           <div aria-hidden="true" className="absolute -top-24 -left-24 size-72 rounded-full bg-accent/10 blur-3xl" />
           <div aria-hidden="true" className="absolute -right-20 -bottom-24 size-72 rounded-full bg-accent/10 blur-3xl" />
 
-          <h1 className="relative font-serif text-6xl leading-none font-medium sm:text-8xl">
+          <h1 className="relative font-serif text-5xl leading-none font-medium sm:text-7xl">
             Rutu <em className="font-normal text-accent">Fashion</em>
           </h1>
         </header>
@@ -26,9 +26,9 @@ export default function HomePage() {
         <section
           id="collection"
           aria-labelledby="collection-heading"
-          className="mx-auto max-w-6xl scroll-mt-20 px-4 pt-12 pb-20 sm:px-6 sm:pt-16"
+          className="mx-auto max-w-6xl scroll-mt-20 px-4 pt-6 pb-20 sm:px-6 sm:pt-8"
         >
-          <div className="mb-8 flex items-end justify-between gap-4">
+          <div className="mb-6 flex items-end justify-between gap-4">
             <h2 id="collection-heading" className="font-serif text-3xl sm:text-4xl">
               The Collection
             </h2>

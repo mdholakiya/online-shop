@@ -1,7 +1,7 @@
 // Friendly message when there are no products yet
 export default function EmptyState() {
   return (
-    <div className="mx-auto max-w-sm py-20 text-center">
+    <div className="mx-auto max-w-sm py-12 text-center">
       {/* Simple hanger icon */}
       <svg
         aria-hidden="true"

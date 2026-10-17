@@ -92,44 +92,77 @@ export default function ProductModal({ product, onClose }: Props) {
           </div>
 
           {/* Details */}
-          <div className="p-6 sm:p-8 md:h-[min(88vh,44rem)] md:overflow-y-auto md:p-10">
+          <div className="flex flex-col p-6 sm:p-8 md:h-[min(88vh,44rem)] md:overflow-y-auto md:p-10">
+            <p className="text-xs font-medium tracking-[0.25em] text-accent uppercase">
+              Rutu Fashion
+            </p>
             <h2
               id="product-modal-title"
-              className="font-serif text-3xl leading-tight font-medium sm:text-4xl"
+              className="mt-2 font-serif text-3xl leading-tight font-medium sm:text-4xl"
             >
               {shown.name}
             </h2>
-            <p className="mt-2 text-2xl font-semibold text-accent">
-              {formatPrice(shown.price)}
-            </p>
 
-            {/* Stock badge (dot + text) */}
-            <p
-              className={`mt-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
-                shown.quantity > 0
-                  ? "bg-emerald-50 text-emerald-800"
-                  : "bg-ink/5 text-muted"
-              }`}
-            >
-              <span
-                aria-hidden="true"
-                className={`size-1.5 rounded-full ${shown.quantity > 0 ? "bg-emerald-600" : "bg-muted"}`}
-              />
-              {shown.quantity > 0
-                ? `In stock · ${shown.quantity} available`
-                : "Currently out of stock"}
-            </p>
+            {/* All details as labelled rows */}
+            <dl className="mt-6 divide-y divide-line overflow-hidden rounded-2xl bg-cream ring-1 ring-line">
+              <DetailRow label="Price">
+                <span className="text-xl font-semibold text-accent">
+                  {formatPrice(shown.price)}
+                </span>
+              </DetailRow>
 
-            <p
-              id="product-modal-description"
-              className="mt-6 text-[15px] leading-relaxed whitespace-pre-line text-ink/85"
-            >
-              {shown.description || "No description yet."}
-            </p>
+              <DetailRow label="Availability">
+                <span
+                  className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
+                    shown.quantity > 0
+                      ? "bg-emerald-50 text-emerald-800 ring-1 ring-emerald-200"
+                      : "bg-ink/5 text-muted ring-1 ring-line"
+                  }`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`size-1.5 rounded-full ${shown.quantity > 0 ? "bg-emerald-600" : "bg-muted"}`}
+                  />
+                  {shown.quantity > 0 ? "In stock" : "Out of stock"}
+                </span>
+              </DetailRow>
 
+              <DetailRow label="Quantity">
+                <span className="font-medium">
+                  {shown.quantity} {shown.quantity === 1 ? "piece" : "pieces"}
+                </span>
+              </DetailRow>
+            </dl>
+
+            {/* Description */}
+            <div className="mt-6">
+              <span className="inline-block rounded-full bg-blush px-3 py-1 text-[11px] font-semibold tracking-wider text-accent uppercase">
+                Description
+              </span>
+              <p
+                id="product-modal-description"
+                className="mt-3 text-[15px] leading-relaxed whitespace-pre-line text-ink/85"
+              >
+                {shown.description || "No description yet."}
+              </p>
+            </div>
           </div>
         </div>
       )}
     </dialog>
+  );
+}
+
+// One labelled row: tag-style label on the left, value on the right
+function DetailRow({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-between gap-4 px-4 py-3.5">
+      <dt>
+        <span className="inline-block rounded-full bg-paper px-3 py-1 text-[11px] font-semibold tracking-wider text-muted uppercase ring-1 ring-line">
+          {label}
+        </span>
+      </dt>
+      <dd className="text-right">{children}</dd>
+    </div>
   );
 }
