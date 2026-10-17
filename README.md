@@ -61,7 +61,7 @@ src/
 | Name | Where to find it |
 | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase → **Connect** button (top bar) → Project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Same dialog, or Project Settings → **API Keys** → the **publishable** key (`sb_publishable_…`). The legacy `anon` key also works, but Supabase is retiring it by the end of 2026. |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Same dialog, or Project Settings → **API Keys** → the **publishable** key (`sb_publishable_…`). The legacy `anon` key also works, but Supabase is retiring it by the end of 2026. |
 
 **Locally:** copy `.env.example` to `.env.local`, paste in your values, and restart `npm run dev`.
 
