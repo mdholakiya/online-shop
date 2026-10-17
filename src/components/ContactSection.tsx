@@ -1,11 +1,10 @@
-import type { Product } from "@/lib/types";
 import { formatAddress } from "@/lib/format";
+import { SHOP } from "@/lib/shop";
 import { MailIcon, PhoneIcon, PinIcon } from "./icons";
 
-type Contact = Pick<Product, "phone" | "email" | "address">;
-
-// Shop contact block shown on the home page (uses the latest product's details)
-export default function ContactSection({ contact }: { contact: Contact }) {
+// Shop contact block shown on the home page (details from src/lib/shop.ts)
+export default function ContactSection() {
+  const contact = SHOP;
   const items = [
     {
       label: "Call us",

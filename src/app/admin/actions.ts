@@ -3,6 +3,7 @@
 import { updateTag } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { PRODUCTS_TAG } from "@/lib/products";
+import { SHOP } from "@/lib/shop";
 import { validateProduct, type FieldErrors, type ProductInput } from "@/lib/validation";
 
 type Result = { ok: true } | { ok: false; message: string; errors?: FieldErrors };
@@ -38,9 +39,10 @@ export async function createProduct(
     price: Number(input.price),
     quantity: Number(input.quantity),
     image_url: input.image_url,
-    phone: input.phone.trim(),
-    email: input.email.trim(),
-    address: input.address.trim(),
+    // Contact columns are filled from the shop settings (src/lib/shop.ts)
+    phone: SHOP.phone,
+    email: SHOP.email,
+    address: SHOP.address,
   });
 
   if (error) return { ok: false, message: `Could not save: ${error.message}` };

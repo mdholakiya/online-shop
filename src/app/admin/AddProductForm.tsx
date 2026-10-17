@@ -15,11 +15,6 @@ import { createProduct } from "./actions";
 
 const BUCKET = "product-images";
 
-type Props = {
-  // Pre-fill contact fields with the last product's details
-  defaultContact?: { phone: string; email: string; address: string };
-};
-
 // Reads the text fields out of the form
 function readInput(form: HTMLFormElement): ProductInput {
   const data = new FormData(form);
@@ -29,13 +24,10 @@ function readInput(form: HTMLFormElement): ProductInput {
     description: get("description"),
     price: get("price"),
     quantity: get("quantity"),
-    phone: get("phone"),
-    email: get("email"),
-    address: get("address"),
   };
 }
 
-export default function AddProductForm({ defaultContact }: Props) {
+export default function AddProductForm() {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -164,24 +156,11 @@ export default function AddProductForm({ defaultContact }: Props) {
           </div>
         </Card>
 
-        <Card step="3" title="Contact details" hint="Shown to customers on the product popup.">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Phone *" name="phone" error={errors.phone}>
-              <input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="+91 98765 43210" defaultValue={defaultContact?.phone} {...aria("phone", errors.phone)} className={inputClass(errors.phone)} />
-            </Field>
-            <Field label="Email *" name="email" error={errors.email}>
-              <input id="email" name="email" type="email" autoComplete="email" placeholder="shop@example.com" defaultValue={defaultContact?.email} {...aria("email", errors.email)} className={inputClass(errors.email)} />
-            </Field>
-          </div>
-          <Field label="Address *" name="address" error={errors.address}>
-            <textarea id="address" name="address" rows={2} placeholder="Shop address" defaultValue={defaultContact?.address} {...aria("address", errors.address)} className={inputClass(errors.address)} />
-          </Field>
-        </Card>
       </div>
 
       {/* Right column: photo + save (sticky on desktop) */}
       <div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-        <Card step="4" title="Photo *">
+        <Card step="3" title="Photo *">
           {/* The whole box is the file picker's label */}
           <label
             htmlFor="image"

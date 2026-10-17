@@ -14,15 +14,9 @@ export type ProductInput = {
   description: string;
   price: string;
   quantity: string;
-  phone: string;
-  email: string;
-  address: string;
 };
 
 export type FieldErrors = Partial<Record<keyof ProductInput | "image", string>>;
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[+()\-\s\d]{7,20}$/;
 
 // Returns an object of error messages (empty object = all good)
 export function validateProduct(input: ProductInput): FieldErrors {
@@ -43,14 +37,6 @@ export function validateProduct(input: ProductInput): FieldErrors {
 
   if (!/^\d+$/.test(input.quantity.trim()))
     errors.quantity = "Enter a whole number (0 or more).";
-
-  if (!PHONE_RE.test(input.phone.trim()))
-    errors.phone = "Enter a valid phone number.";
-
-  if (!EMAIL_RE.test(input.email.trim()))
-    errors.email = "Enter a valid email address.";
-
-  if (!input.address.trim()) errors.address = "Address is required.";
 
   return errors;
 }

@@ -39,6 +39,8 @@ export default function HomePage() {
           <Suspense fallback={<ProductGridSkeleton />}>
             <Products />
           </Suspense>
+
+          <ContactSection />
         </section>
       </main>
 
@@ -56,11 +58,5 @@ async function Products() {
   if (products.length === 0) {
     return <EmptyState />;
   }
-  return (
-    <>
-      <ProductGrid products={products} />
-      {/* Contact details from the most recently added product */}
-      <ContactSection contact={products[0]} />
-    </>
-  );
+  return <ProductGrid products={products} />;
 }

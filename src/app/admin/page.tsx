@@ -68,7 +68,6 @@ async function AdminContent() {
   // Quick numbers for the stat cards
   const totalStock = products.reduce((sum, p) => sum + p.quantity, 0);
   const soldOut = products.filter((p) => p.quantity === 0).length;
-  const latest = products[0];
 
   const stats = [
     { label: "Products", value: products.length, note: "in your shop", icon: <TagIcon />, tone: "bg-blush text-accent" },
@@ -130,15 +129,9 @@ async function AdminContent() {
             Add a new dress
           </h2>
           <p className="mt-1 text-sm text-muted">
-            Fields marked * are required. Contact details are pre-filled from your last product.
+            Fields marked * are required.
           </p>
-          <AddProductForm
-            defaultContact={
-              latest
-                ? { phone: latest.phone, email: latest.email, address: latest.address }
-                : undefined
-            }
-          />
+          <AddProductForm />
         </section>
 
         <section aria-labelledby="list-heading" className="mt-14">

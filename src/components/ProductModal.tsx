@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Product } from "@/lib/types";
-import { formatAddress, formatPrice } from "@/lib/format";
-import { MailIcon, PhoneIcon, PinIcon } from "./icons";
+import { formatPrice } from "@/lib/format";
 
 type Props = {
   product: Product | null; // null = closed
@@ -128,38 +127,6 @@ export default function ProductModal({ product, onClose }: Props) {
               {shown.description || "No description yet."}
             </p>
 
-            {/* Contact: big tap-friendly buttons */}
-            <div className="mt-8 rounded-2xl bg-cream p-5 ring-1 ring-line">
-              <h3 className="text-xs font-medium tracking-[0.25em] text-muted uppercase">
-                Order this dress
-              </h3>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <a
-                  href={`tel:${shown.phone.replace(/\s+/g, "")}`}
-                  className="flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-medium text-paper shadow-sm transition hover:bg-accent-dark"
-                >
-                  <PhoneIcon className="size-4" />
-                  Call {shown.phone}
-                </a>
-                <a
-                  href={`mailto:${shown.email}?subject=${encodeURIComponent(`Enquiry: ${shown.name}`)}`}
-                  className="flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-paper px-4 py-3 text-sm font-medium transition hover:border-accent hover:text-accent"
-                >
-                  <MailIcon className="size-4" />
-                  Email us
-                </a>
-              </div>
-              <dl className="mt-5 space-y-2 text-sm">
-                <div className="flex gap-2">
-                  <dt className="text-muted"><MailIcon className="mt-0.5 size-4" /><span className="sr-only">Email</span></dt>
-                  <dd className="min-w-0 break-words">{shown.email}</dd>
-                </div>
-                <div className="flex gap-2">
-                  <dt className="text-muted"><PinIcon className="mt-0.5 size-4" /><span className="sr-only">Address</span></dt>
-                  <dd>{formatAddress(shown.address)}</dd>
-                </div>
-              </dl>
-            </div>
           </div>
         </div>
       )}
