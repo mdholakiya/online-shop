@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
+import { MailIcon, PhoneIcon, PinIcon } from "./icons";
 
 type Props = {
   product: Product | null; // null = closed
@@ -81,7 +82,7 @@ export default function ProductModal({ product, onClose }: Props) {
           />
 
           {/* Image */}
-          <div className="relative h-[52dvh] bg-line md:h-[min(88vh,44rem)]">
+          <div className="relative h-[52dvh] bg-blush md:h-[min(88vh,44rem)]">
             <Image
               src={shown.image_url}
               alt={shown.name}
@@ -99,53 +100,62 @@ export default function ProductModal({ product, onClose }: Props) {
             >
               {shown.name}
             </h2>
-            <p className="mt-2 text-xl text-accent">
+            <p className="mt-2 text-2xl font-semibold text-accent">
               {formatPrice(shown.price)}
             </p>
 
-            <p className="mt-3 text-sm text-muted">
+            {/* Stock badge (dot + text) */}
+            <p
+              className={`mt-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
+                shown.quantity > 0
+                  ? "bg-emerald-50 text-emerald-800"
+                  : "bg-ink/5 text-muted"
+              }`}
+            >
+              <span
+                aria-hidden="true"
+                className={`size-1.5 rounded-full ${shown.quantity > 0 ? "bg-emerald-600" : "bg-muted"}`}
+              />
               {shown.quantity > 0
-                ? `${shown.quantity} available`
+                ? `In stock · ${shown.quantity} available`
                 : "Currently out of stock"}
             </p>
 
             <p
               id="product-modal-description"
-              className="mt-6 text-[15px] leading-relaxed whitespace-pre-line"
+              className="mt-6 text-[15px] leading-relaxed whitespace-pre-line text-ink/85"
             >
               {shown.description || "No description yet."}
             </p>
 
-            {/* Contact details */}
-            <div className="mt-8 border-t border-line pt-6">
-              <h3 className="text-xs tracking-[0.25em] text-muted uppercase">
-                Contact us
+            {/* Contact: big tap-friendly buttons */}
+            <div className="mt-8 rounded-2xl bg-cream p-5 ring-1 ring-line">
+              <h3 className="text-xs font-medium tracking-[0.25em] text-muted uppercase">
+                Order this dress
               </h3>
-              <dl className="mt-4 space-y-3 text-sm">
-                <div className="flex gap-3">
-                  <dt className="w-16 shrink-0 text-muted">Phone</dt>
-                  <dd>
-                    <a
-                      href={`tel:${shown.phone.replace(/\s+/g, "")}`}
-                      className="underline decoration-line underline-offset-4 hover:decoration-accent"
-                    >
-                      {shown.phone}
-                    </a>
-                  </dd>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <a
+                  href={`tel:${shown.phone.replace(/\s+/g, "")}`}
+                  className="flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-medium text-paper shadow-sm transition hover:bg-accent-dark"
+                >
+                  <PhoneIcon className="size-4" />
+                  Call {shown.phone}
+                </a>
+                <a
+                  href={`mailto:${shown.email}?subject=${encodeURIComponent(`Enquiry: ${shown.name}`)}`}
+                  className="flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-paper px-4 py-3 text-sm font-medium transition hover:border-accent hover:text-accent"
+                >
+                  <MailIcon className="size-4" />
+                  Email us
+                </a>
+              </div>
+              <dl className="mt-5 space-y-2 text-sm">
+                <div className="flex gap-2">
+                  <dt className="text-muted"><MailIcon className="mt-0.5 size-4" /><span className="sr-only">Email</span></dt>
+                  <dd className="min-w-0 break-words">{shown.email}</dd>
                 </div>
-                <div className="flex gap-3">
-                  <dt className="w-16 shrink-0 text-muted">Email</dt>
-                  <dd className="min-w-0 break-words">
-                    <a
-                      href={`mailto:${shown.email}`}
-                      className="underline decoration-line underline-offset-4 hover:decoration-accent"
-                    >
-                      {shown.email}
-                    </a>
-                  </dd>
-                </div>
-                <div className="flex gap-3">
-                  <dt className="w-16 shrink-0 text-muted">Address</dt>
+                <div className="flex gap-2">
+                  <dt className="text-muted"><PinIcon className="mt-0.5 size-4" /><span className="sr-only">Address</span></dt>
                   <dd className="whitespace-pre-line">{shown.address}</dd>
                 </div>
               </dl>

@@ -2,13 +2,14 @@
 
 /* ---------- Design tokens (one accent color) ---------- */
 @theme {
-  --color-cream: #f8f4ee;      /* page background */
-  --color-paper: #fffdf9;      /* cards / modal */
-  --color-ink: #1f1b18;        /* main text */
-  --color-muted: #6f665e;      /* secondary text */
-  --color-line: #e6ded3;       /* borders */
-  --color-accent: #8c3b2f;     /* the single accent (terracotta) */
-  --color-accent-dark: #6f2e24;
+  --color-cream: #fff8f6;      /* page background (soft blush ivory) */
+  --color-blush: #ffe8ef;      /* header band / soft highlights */
+  --color-paper: #ffffff;      /* cards / modal */
+  --color-ink: #2b1621;        /* main text (deep plum) */
+  --color-muted: #7b6470;      /* secondary text */
+  --color-line: #f2dde3;       /* borders */
+  --color-accent: #c2185b;     /* the single accent (rose magenta) */
+  --color-accent-dark: #9c1149;
 
   --font-serif: var(--font-cormorant), Georgia, serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -66,7 +67,7 @@ body {
 }
 
 .product-modal[open]::backdrop {
-  background: rgb(31 27 24 / 0.45);
+  background: rgb(43 22 33 / 0.5);
   backdrop-filter: blur(3px);
 }
 

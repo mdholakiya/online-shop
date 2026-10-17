@@ -44,7 +44,7 @@ export default function LoginForm() {
           type="email"
           autoComplete="email"
           required
-          className="mt-1.5 w-full rounded-md border border-line bg-paper px-3 py-2.5 outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+          className="mt-1.5 w-full rounded-xl border border-line bg-cream/50 px-3.5 py-2.5 transition outline-none focus:border-accent focus:bg-paper focus:ring-4 focus:ring-accent/10"
         />
       </div>
 
@@ -58,12 +58,12 @@ export default function LoginForm() {
           type="password"
           autoComplete="current-password"
           required
-          className="mt-1.5 w-full rounded-md border border-line bg-paper px-3 py-2.5 outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+          className="mt-1.5 w-full rounded-xl border border-line bg-cream/50 px-3.5 py-2.5 transition outline-none focus:border-accent focus:bg-paper focus:ring-4 focus:ring-accent/10"
         />
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-accent">
+        <p role="alert" className="rounded-lg bg-blush px-3 py-2 text-sm text-accent">
           {error}
         </p>
       )}
@@ -71,7 +71,7 @@ export default function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full cursor-pointer rounded-md bg-accent px-4 py-3 text-sm font-medium tracking-wide text-paper transition hover:bg-accent-dark disabled:opacity-60"
+        className="w-full cursor-pointer rounded-full bg-accent px-4 py-3.5 shadow-md shadow-accent/20 text-sm font-medium tracking-wide text-paper transition hover:bg-accent-dark disabled:opacity-60"
       >
         {loading ? "Signing in…" : "Sign in"}
       </button>

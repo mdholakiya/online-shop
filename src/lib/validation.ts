@@ -39,7 +39,7 @@ export function validateProduct(input: ProductInput): FieldErrors {
   if (input.price.trim() === "" || Number.isNaN(price) || price < 0)
     errors.price = "Enter a price of 0 or more.";
   else if (!/^\d+(\.\d{1,2})?$/.test(input.price.trim()))
-    errors.price = "Use up to 2 decimals, e.g. 49.99";
+    errors.price = "Use up to 2 decimals, e.g. 1499 or 1499.50";
 
   if (!/^\d+$/.test(input.quantity.trim()))
     errors.quantity = "Enter a whole number (0 or more).";

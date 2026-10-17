@@ -13,6 +13,7 @@ type Props = {
 
 export default function ProductCard({ product, index, onOpen }: Props) {
   const soldOut = product.quantity === 0;
+  const lowStock = !soldOut && product.quantity <= 3;
 
   return (
     <button
@@ -20,11 +21,11 @@ export default function ProductCard({ product, index, onOpen }: Props) {
       onClick={onOpen}
       aria-haspopup="dialog"
       aria-label={`View details for ${product.name}`}
-      className="group animate-fade-up block w-full cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+      className="group animate-fade-up block w-full cursor-pointer rounded-2xl bg-paper p-2 text-left shadow-sm ring-1 ring-line/60 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
     >
       <div
-        className={`relative overflow-hidden rounded-lg bg-line ${shapes[index % shapes.length]}`}
+        className={`relative overflow-hidden rounded-xl bg-blush ${shapes[index % shapes.length]}`}
       >
         <Image
           src={product.image_url}
@@ -35,18 +36,30 @@ export default function ProductCard({ product, index, onOpen }: Props) {
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           preload={index < 2} // load the first images early
         />
+
+        {/* Stock badges (text, not just color) */}
         {soldOut && (
-          <span className="absolute top-3 left-3 rounded-full bg-paper/90 px-3 py-1 text-[11px] tracking-wider uppercase">
+          <span className="absolute top-3 left-3 rounded-full bg-ink/85 px-3 py-1 text-[11px] font-medium tracking-wider text-paper uppercase">
             Sold out
           </span>
         )}
+        {lowStock && (
+          <span className="absolute top-3 left-3 rounded-full bg-accent px-3 py-1 text-[11px] font-medium tracking-wider text-paper uppercase">
+            Only {product.quantity} left
+          </span>
+        )}
+
+        {/* "View details" pill slides up on hover */}
+        <span className="absolute inset-x-3 bottom-3 translate-y-2 rounded-full bg-paper/95 py-2 text-center text-xs font-medium tracking-wide opacity-0 shadow transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          View details
+        </span>
       </div>
 
-      <div className="mt-3 flex items-baseline justify-between gap-3 px-0.5">
-        <h2 className="font-serif text-lg leading-tight sm:text-xl">
+      <div className="px-2 pt-3 pb-2">
+        <h3 className="font-serif text-lg leading-tight sm:text-xl">
           {product.name}
-        </h2>
-        <p className="shrink-0 text-sm text-muted">
+        </h3>
+        <p className="mt-1 text-sm font-semibold text-accent">
           {formatPrice(product.price)}
         </p>
       </div>
