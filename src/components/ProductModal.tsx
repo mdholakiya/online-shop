@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import FitImage from "./FitImage";
+import ImageLightbox from "./ImageLightbox";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 
@@ -14,6 +15,7 @@ type Props = {
 // showModal() gives us: focus kept inside, rest of page inert, Esc to close.
 export default function ProductModal({ product, onClose }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const [zoomed, setZoomed] = useState(false); // full-screen photo open?
 
   // Keep showing the last product while the close animation plays
   const [shown, setShown] = useState<Product | null>(product);
@@ -44,6 +46,7 @@ export default function ProductModal({ product, onClose }: Props) {
   }
 
   return (
+    <>
     <dialog
       ref={dialogRef}
       className="product-modal"
@@ -80,16 +83,26 @@ export default function ProductModal({ product, onClose }: Props) {
             className="absolute top-2 left-1/2 z-10 h-1 w-10 -translate-x-1/2 rounded-full bg-paper/80 md:hidden"
           />
 
-          {/* Image */}
-          <div className="relative h-[52dvh] bg-blush md:h-[min(88vh,44rem)]">
-            <Image
+          {/* Image: whole photo; click to open full screen */}
+          <button
+            type="button"
+            onClick={() => setZoomed(true)}
+            aria-label={`View full image of ${shown.name}`}
+            className="group relative block h-[52dvh] w-full cursor-zoom-in overflow-hidden bg-blush md:h-[min(88vh,44rem)]"
+          >
+            <FitImage
               src={shown.image_url}
               alt={shown.name}
-              fill
               sizes="(min-width: 768px) 480px, 100vw"
-              className="object-cover"
             />
-          </div>
+            <span className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full bg-paper/90 px-3 py-1.5 text-xs font-medium text-ink shadow transition group-hover:bg-paper">
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                <circle cx="11" cy="11" r="6" />
+                <path d="m20 20-4.5-4.5M11 8v6M8 11h6" />
+              </svg>
+              Tap to zoom
+            </span>
+          </button>
 
           {/* Details (min-w-0 lets long text wrap instead of overflowing) */}
           <div className="flex min-w-0 flex-col overflow-x-hidden p-6 sm:p-8 md:h-[min(88vh,44rem)] md:overflow-y-auto md:p-10">
@@ -148,5 +161,16 @@ export default function ProductModal({ product, onClose }: Props) {
         </div>
       )}
     </dialog>
+
+    {/* Full-screen photo viewer */}
+    {shown && (
+      <ImageLightbox
+        src={shown.image_url}
+        alt={shown.name}
+        open={zoomed && product !== null}
+        onClose={() => setZoomed(false)}
+      />
+    )}
+    </>
   );
 }

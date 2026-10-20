@@ -1,4 +1,4 @@
-import Image from "next/image";
+import FitImage from "./FitImage";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 
@@ -24,13 +24,13 @@ export default function ProductCard({ product, index, onOpen }: Props) {
       <div
         className="relative aspect-[3/4] overflow-hidden rounded-xl bg-blush" // same portrait size for every card
       >
-        <Image
+        {/* Whole photo, never cropped */}
+        <FitImage
           src={product.image_url}
           alt={product.name}
-          fill
           // Grid is 2 columns on mobile, 3 on large screens (max ~1150px wide)
           sizes="(min-width: 1152px) 370px, (min-width: 1024px) 33vw, 50vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="transition-transform duration-700 ease-out group-hover:scale-105"
           preload={index < 2} // load the first images early
         />
 
