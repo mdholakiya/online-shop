@@ -47,21 +47,10 @@ export default function ContactSection() {
           </a>
         </li>
 
-        {/* Address + map location (opens Google Maps) */}
+        {/* Address */}
         <li className={cardClass}>
           <CardHeader icon={<PinIcon />} label="Visit us" />
           <p className="mt-1 text-base">{formatAddress(SHOP.address)}</p>
-          <a
-            href={SHOP.location.mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-medium text-paper transition hover:bg-accent-dark focus-visible:outline-2 focus-visible:outline-blush"
-          >
-            <PinIcon className="size-4" />
-            View on map
-            <span className="sr-only">(opens Google Maps in a new tab)</span>
-          </a>
-          <p className="mt-2 text-xs text-paper/50">{SHOP.location.label}</p>
         </li>
       </ul>
     </section>

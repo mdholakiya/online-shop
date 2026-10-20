@@ -5,12 +5,7 @@ export const SHOP = {
   phones: ["9913754991", "8000192279"],
   email: "admin@rutufashion.com",
   // Typed address shown under "Visit us"
-  address: "Rameshwar Society, 65, Industrial Area, Singanpor, Surat, Gujarat 395004, India",
-  // Map pin: 21°11'32.0"N 72°50'28.9"E (decimal: 21.192222, 72.841361)
-  location: {
-    label: `21°11'32.0"N 72°50'28.9"E`,
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=21.192222,72.841361",
-  },
+  address: "Shop 1048, Underground, Tirupati Market, Ring Road, Surat - 395002",
 };
 
 // "9913754991" → "+91 99137 54991" (display) and "+919913754991" (tel: link)
