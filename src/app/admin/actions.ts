@@ -40,7 +40,7 @@ export async function createProduct(
     quantity: Number(input.quantity),
     image_url: input.image_url,
     // Contact columns are filled from the shop settings (src/lib/shop.ts)
-    phone: SHOP.phone,
+    phone: SHOP.phones.join(" / "),
     email: SHOP.email,
     address: SHOP.address,
   });
